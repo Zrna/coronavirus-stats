@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
 
-function App() {
+import { getApiDataAction } from './store/actions';
+
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <button onClick={props.getApiData}>Get data</button>
+      {JSON.stringify(props.data)}
+      <p style={{ color: 'red' }}>{props.error}</p>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    data: state.apiData.data,
+    error: state.apiData.error
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getApiData: () => dispatch(getApiDataAction())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

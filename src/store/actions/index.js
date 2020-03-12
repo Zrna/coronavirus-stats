@@ -1,0 +1,1 @@
+export { getApiDataAction } from './getApiDataAction';
