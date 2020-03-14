@@ -7,7 +7,14 @@ const getApiDataReducer = (state = {}, action) => {
   if (action.type === GET_API_DATA_SUCCESS) {
     return {
       ...newState,
-      data: action.data
+      data: action.data[0],
+      numberOfConfirmed: action.data[0].latest.confirmed,
+      numberOfDeaths: action.data[0].latest.deaths,
+      numberOfRecovered: action.data[0].latest.recovered,
+      lastUpdated: action.data[0].confirmed.last_updated,
+      countryConfirmedDataSum: action.data[1][0].countryConfirmedDataSum,
+      countryDeathsDataSum: action.data[1][0].countryDeathsDataSum,
+      countryRecoveredDataSum: action.data[1][0].countryRecoveredDataSum
     };
   } else if (action.type === GET_API_DATA_ERROR) {
     console.log('error', action.error);
