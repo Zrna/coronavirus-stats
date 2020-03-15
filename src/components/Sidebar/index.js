@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { getApiDataAction } from '../../store/actions';
-import { roundNumber } from '../../common';
+import { roundNumber, formatDate, formatTime } from '../../common';
 
 import '../../styles/_style.scss';
 import './style.scss';
@@ -35,7 +35,12 @@ const Sidebar = (props) => {
             <span>{props.numberOfCurrentlySick}</span> currently sick
           </p>
         </div>
-        <p>Last update <span>{props.lastUpdated}</span></p>
+        {props.lastUpdatedDate && props.lastUpdatedTime ?
+          <p>Last update <span id='last-updated-date' title='DD/MM/YYYY'>{props.lastUpdatedDate}</span> in <span id='last-updated-time' title='HH/MM/SS'>{props.lastUpdatedTime}</span>
+          .</p>
+          :
+          null
+        }
       </div>
       <div className='country-list'>
         {props.countryConfirmedDataSum && props.countryConfirmedDataSum.map((country, i) => {
@@ -59,6 +64,8 @@ const mapStateToProps = (state) => {
     numberOfRecovered: roundNumber(state.apiData.numberOfRecovered),
     numberOfCurrentlySick: roundNumber(state.apiData.numberOfCurrentlySick),
     lastUpdated: state.apiData.lastUpdated,
+    lastUpdatedDate: formatDate(state.apiData.lastUpdated),
+    lastUpdatedTime: formatTime(state.apiData.lastUpdated),
     countryConfirmedDataSum: state.apiData.countryConfirmedDataSum,
     countryDeathsDataSum: state.apiData.countryDeathsDataSum,
     countryRecoveredDataSum: state.apiData.countryRecoveredDataSum
