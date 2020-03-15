@@ -1,0 +1,16 @@
+.flex-grid {
+  display: flex;
+  padding: 0 20px;
+  
+  .col {
+    // flex: 1;
+
+    &.sidebar {
+      width: 20%;
+    }
+
+    &.main-content {
+      width: 80%;
+    }
+  }
+}
