@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { getApiDataAction } from '../../store/actions';
+import { getApiDataAction, selectedCountryAction } from '../../store/actions';
 import { roundNumber, formatDate, formatTime } from '../../common';
 
 import '../../styles/_style.scss';
@@ -26,6 +26,11 @@ const Sidebar = (props) => {
       country.country.toLowerCase().includes(inputValue)
     );
     setCountryList(filterList);
+  };
+
+  const handleSelectCountry = (selectedCountry) => () => {
+    console.log('selected country', selectedCountry);
+    props.selectedCountryDispatchToStore(selectedCountry);
   };
 
   return (
@@ -57,13 +62,15 @@ const Sidebar = (props) => {
         }
       </div>
       <div className='input-search'>
-        <input placeholder='Type country name...' autoFocus autoComplete onChange={handleInputOnChange} />
+        <input placeholder='Type country name...' autoFocus onChange={handleInputOnChange} />
       </div>
       <div className='country-list'>
         {countryList && countryList.map((country, i) => {
           return (
             <div key={i} style={{ borderBottom: '1px solid #ccc'}}>
-              <p><strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span></p>
+              <p onClick={handleSelectCountry(country)}>
+                <strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span>
+              </p>
             </div>
           );
         })}
@@ -91,7 +98,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getApiData: () => dispatch(getApiDataAction())
+    getApiData: () => dispatch(getApiDataAction()),
+    selectedCountryDispatchToStore: (country) => dispatch(selectedCountryAction(country))
   };
 };
 
