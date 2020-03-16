@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { getApiDataAction } from '../../store/actions';
@@ -8,11 +8,25 @@ import '../../styles/_style.scss';
 import './style.scss';
 
 const Sidebar = (props) => {
+  const [countryList, setCountryList] = useState();
   const { getApiData } = props;
 
   useEffect(() => {
     getApiData();
   }, [getApiData]);
+
+  // setting initial country list - resolved redux saga and useEffect infinite loop
+  if (props.countryConfirmedDataSum && countryList === undefined) {
+    setCountryList(props.countryConfirmedDataSum);
+  }
+
+  const handleInputOnChange = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    const filterList = props.countryConfirmedDataSum.filter(country => 
+      country.country.toLowerCase().includes(inputValue)
+    );
+    setCountryList(filterList);
+  };
 
   return (
     <div className='col sidebar'>
@@ -42,8 +56,11 @@ const Sidebar = (props) => {
           null
         }
       </div>
+      <div className='input-search'>
+        <input placeholder='Type country name...' autoFocus autoComplete onChange={handleInputOnChange} />
+      </div>
       <div className='country-list'>
-        {props.countryConfirmedDataSum && props.countryConfirmedDataSum.map((country, i) => {
+        {countryList && countryList.map((country, i) => {
           return (
             <div key={i} style={{ borderBottom: '1px solid #ccc'}}>
               <p><strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span></p>
