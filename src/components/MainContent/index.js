@@ -14,6 +14,7 @@ const MainContent = (props) => {
   let confirmed,
     deaths,
     recovered,
+    currentlySick,
     sortedConfirmedHistoryDates,
     sortedConfirmedHistoryValues,
     sortedDeathsHistoryDates,
@@ -25,6 +26,7 @@ const MainContent = (props) => {
     confirmed = props.data.confirmed.locations.find(country => country.country === props.country);
     deaths = props.data.deaths.locations.find(country => country.country === props.country);
     recovered = props.data.recovered.locations.find(country => country.country === props.country);
+    currentlySick = confirmed.latest - deaths.latest - recovered.latest;
 
     const sortedConfirmedData = sortDataByDate(confirmed);
     sortedConfirmedHistoryDates = sortedConfirmedData[1];
@@ -54,7 +56,10 @@ const MainContent = (props) => {
       {props.country ? <h1>{props.country}</h1> : null }
       {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
         <>
-          <p>Total cases: <strong>{props.latest}</strong></p>
+          <p>Total cases: <strong>{roundNumber(confirmed.latest)}</strong></p>
+          <p>Deaths: <strong>{roundNumber(deaths.latest)}</strong></p>
+          <p>Recovered: <strong>{roundNumber(recovered.latest)}</strong></p>
+          <p>Currently sick: <strong>{roundNumber(currentlySick)}</strong></p>
         </>
         :
         <DefaultMessages />
