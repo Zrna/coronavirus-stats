@@ -53,14 +53,27 @@ const MainContent = (props) => {
 
   return (
     <div className='col main-content'>
-      {props.country ? <h1>{props.country}</h1> : null }
-      {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
+      {props.country ?  
         <>
-          <p>Total cases: <strong>{roundNumber(confirmed.latest)}</strong></p>
-          <p>Deaths: <strong>{roundNumber(deaths.latest)}</strong></p>
-          <p>Recovered: <strong>{roundNumber(recovered.latest)}</strong></p>
-          <p>Currently sick: <strong>{roundNumber(currentlySick)}</strong></p>
+          {props.selectedCountry.country_code ? 
+            <img
+              style={{ verticalAlign: 'sub', marginRight: '20px' }}
+              src={`https://www.countryflags.io/${props.selectedCountry.country_code}/flat/32.png`}
+              alt={props.selectedCountry.country_code}
+            />
+            : null
+          }
+          <h1 style={{ display: 'inline-block' }}>{props.country}</h1>
         </>
+        : null
+      }
+      {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
+        <div className='info'>
+          <p>Total cases: <span>{roundNumber(confirmed.latest)}</span></p>
+          <p>Deaths: <span>{roundNumber(deaths.latest)}</span></p>
+          <p>Recovered: <span>{roundNumber(recovered.latest)}</span></p>
+          <p>Currently sick: <span>{roundNumber(currentlySick)}</span></p>
+        </div>
         :
         <DefaultMessages />
       }

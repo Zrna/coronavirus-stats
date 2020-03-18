@@ -8,4 +8,20 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
+  .info {
+    display: inline-block;
+
+    p {
+      display: inline-block;
+      margin-left: 20px;
+      text-align: center;
+
+      span {
+        display: block;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+    }
+  }
 }

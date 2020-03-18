@@ -9,12 +9,15 @@ function getSumData(res, propertyName) {
 
   const combineData = data.reduce((prev, curr) => {
     const count = prev.get(curr.country) || 0;
-    prev.set(curr.country, curr.latest + count);
+    prev.set(`${curr.country} ${curr.country_code}`, curr.latest + count, curr.country_code);
     return prev;
   }, new Map());
 
   const combineDataSum = [...combineData].map(([country, latest]) => {
-    return {country, latest};
+    return {
+      country: country.slice(0, -3),
+      latest,
+      country_code: country.slice(-2)};
   });
 
   const sortCombinedData = combineDataSum.sort((a, b) => parseFloat(b.latest) - parseFloat(a.latest));
