@@ -63,7 +63,7 @@
     font-size: 16px;
     text-transform: capitalize;
     padding: 5px 0;
-    background: $background-color;
+    background: $sidebar-background-color;
     border: none;
     border-bottom: 2px solid $gray-color;
     color: white;
@@ -76,7 +76,7 @@
 }
 
 .country-list {
-  height: calc(100vh - 370px);
+  height: calc(100vh - 367px);
   overflow-y: scroll;
 
   &::-webkit-scrollbar-track {
@@ -96,12 +96,16 @@
     background-color: $light-black;
   }
 
-  p:hover {
-    cursor: pointer;
-  }
+  .country-row {
+    border-bottom: 1px solid $background-color;
 
-  .numbers {
-    color: $red-color;
-    font-weight: bold;
+    p:hover {
+      cursor: pointer;
+    }
+  
+    .numbers {
+      color: $red-color;
+      font-weight: bold;
+    }
   }
 }

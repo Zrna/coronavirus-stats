@@ -1,16 +1,24 @@
+@import './_colors.scss';
+
 .flex-grid {
   display: flex;
-  padding: 0 20px;
   
   .col {
     // flex: 1;
 
     &.sidebar {
       width: 20%;
+      background: $sidebar-background-color;
     }
 
     &.main-content {
       width: 80%;
+    }
+
+    &.sidebar,
+    &.main-content {
+      padding: 15px;
+      padding-bottom: 0;
     }
   }
 }

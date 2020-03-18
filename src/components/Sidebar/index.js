@@ -36,7 +36,7 @@ const Sidebar = (props) => {
   return (
     <div className='col sidebar'>
       <div className='sum-data'>
-        <h1>Corona Virus Statistics</h1>
+        <h2>Corona Virus Statistics</h2>
         {props.error ? <p style={{ color: '#e60036' }}>{props.error}</p> : null}
         <div className='cards-row'>
           <p className='card confirmed'>
@@ -67,7 +67,7 @@ const Sidebar = (props) => {
       <div className='country-list'>
         {countryList && countryList.map((country, i) => {
           return (
-            <div key={i} style={{ borderBottom: '1px solid #ccc'}}>
+            <div key={i} className='country-row'>
               <p onClick={handleSelectCountry(country)}>
                 <strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span>
               </p>

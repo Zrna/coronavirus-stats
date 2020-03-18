@@ -21,3 +21,16 @@ export const formatTime = timestamp => {
     return `${hour}:${minute}:${second}`;
   }
 };
+
+export const sortDataByDate = (categoryData) => {
+  if (categoryData.history !== undefined) {
+    let sortedData = Object.keys(categoryData.history).map(key => ({date: key, number: categoryData.history[key]}));
+    sortedData = sortedData.sort((a,b)=> new Date(a.date) - new Date(b.date));
+    sortedData = Object.values(sortedData);
+
+    const sortedDates = sortedData.map(a => a.date);
+    const sortedNumbers = sortedData.map(a => a.number);
+
+    return [sortedData, sortedDates, sortedNumbers];
+  }
+};
