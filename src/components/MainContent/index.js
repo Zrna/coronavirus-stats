@@ -16,11 +16,12 @@ const MainContent = (props) => {
     recovered,
     currentlySick,
     sortedConfirmedHistoryDates,
-    sortedConfirmedHistoryValues,
+    sortedConfirmedHistoryNumbers,
     sortedDeathsHistoryDates,
-    sortedDeathsHistoryValues,
+    sortedDeathsHistoryNumbers,
     sortedRecoveredHistoryDates,
-    sortedRecoveredHistoryValues;
+    sortedRecoveredHistoryNumbers,
+    inTheLast24h;
 
   if (props.country) {
     confirmed = props.data.confirmed.locations.find(country => country.country === props.country);
@@ -30,15 +31,17 @@ const MainContent = (props) => {
 
     const sortedConfirmedData = sortDataByDate(confirmed);
     sortedConfirmedHistoryDates = sortedConfirmedData[1];
-    sortedConfirmedHistoryValues = sortedConfirmedData[2];
+    sortedConfirmedHistoryNumbers = sortedConfirmedData[2];
 
     const sortedDeathsData = sortDataByDate(deaths);
     sortedDeathsHistoryDates = sortedDeathsData[1];
-    sortedDeathsHistoryValues = sortedDeathsData[2];
+    sortedDeathsHistoryNumbers = sortedDeathsData[2];
 
     const sortedRecoveredData = sortDataByDate(recovered);
     sortedRecoveredHistoryDates = sortedRecoveredData[1];
-    sortedRecoveredHistoryValues = sortedRecoveredData[2];
+    sortedRecoveredHistoryNumbers = sortedRecoveredData[2];
+
+    inTheLast24h = sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 1] - sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 2];
   }
 
   const DefaultMessages = () => {
@@ -73,6 +76,7 @@ const MainContent = (props) => {
           <p className='country-card'><span>{roundNumber(deaths.latest)}</span>Deaths</p>
           <p className='country-card'><span>{roundNumber(recovered.latest)}</span>Recovered</p>
           <p className='country-card'><span>{roundNumber(currentlySick)}</span>Currently sick</p>
+          <p className='country-card'><span>+ {roundNumber(inTheLast24h)}</span>in the last 24h</p>
         </div>
         :
         <DefaultMessages />
@@ -88,7 +92,7 @@ const MainContent = (props) => {
 
           <LineChart
             labels={sortedConfirmedHistoryDates}
-            data={sortedConfirmedHistoryValues}
+            data={sortedConfirmedHistoryNumbers}
             title='Total cases per day'
             borderColor='#e60036'
             backgroundColor='rgba(230, 0, 54, 0.4)'
@@ -96,7 +100,7 @@ const MainContent = (props) => {
 
           <LineChart
             labels={sortedDeathsHistoryDates}
-            data={sortedDeathsHistoryValues}
+            data={sortedDeathsHistoryNumbers}
             title='Total deaths per day'
             borderColor='#571aab'
             backgroundColor='rgb(87, 26, 171, 0.4)'
@@ -104,7 +108,7 @@ const MainContent = (props) => {
 
           <LineChart
             labels={sortedRecoveredHistoryDates}
-            data={sortedRecoveredHistoryValues}
+            data={sortedRecoveredHistoryNumbers}
             title='Total recovered per day'
             borderColor='#4fc974'
             backgroundColor='rgb(79, 201, 116, 0.4)'
