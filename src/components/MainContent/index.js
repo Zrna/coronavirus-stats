@@ -81,8 +81,8 @@ const MainContent = (props) => {
       {confirmed && deaths && recovered && props.selectedCountry.latest !== 0 ?
         <>
           <PieChart
-            labels={['Confirmed', 'Deaths', 'Recovered']}
-            data={{confirmed, deaths, recovered}}
+            labels={['Currently sick', 'Deaths', 'Recovered']}
+            data={{currentlySick, deaths, recovered}}
             title='Total data'
           />
 

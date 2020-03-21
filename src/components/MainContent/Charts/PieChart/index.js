@@ -7,10 +7,10 @@ const PieChart = (props) => {
     labels: props.labels,
     datasets: [
       {
-        backgroundColor: ['#e60036', '#571aab', '#4fc974'],
-        hoverBackgroundColor: ['#80001e', '#2d0d59', '#2a8946'],
+        backgroundColor: ['#3333ff', '#571aab', '#4fc974'],
+        hoverBackgroundColor: ['#0000cc', '#2d0d59', '#2a8946'],
         data: [
-          props.data.confirmed ? props.data.confirmed.latest : null,
+          props.data.currentlySick ? props.data.currentlySick : null,
           props.data.deaths ? props.data.deaths.latest : null,
           props.data.recovered ? props.data.recovered.latest : null
         ]
@@ -27,7 +27,8 @@ const PieChart = (props) => {
       fontStyle: 'normal'
     },
     legend: {
-      display: false
+      display: true,
+      position: 'top'
     }
   };
 
