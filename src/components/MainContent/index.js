@@ -73,10 +73,10 @@ const MainContent = (props) => {
       {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
         <div className='info'>
           <p className='country-card'><span>{roundNumber(confirmed.latest)}</span>Total cases</p>
+          <p className='country-card'><span>+ {roundNumber(inTheLast24h)}</span>in the last 24h</p>
           <p className='country-card'><span>{roundNumber(deaths.latest)}</span>Deaths</p>
           <p className='country-card'><span>{roundNumber(recovered.latest)}</span>Recovered</p>
           <p className='country-card'><span>{roundNumber(currentlySick)}</span>Currently sick</p>
-          <p className='country-card'><span>+ {roundNumber(inTheLast24h)}</span>in the last 24h</p>
         </div>
         :
         <DefaultMessages />
