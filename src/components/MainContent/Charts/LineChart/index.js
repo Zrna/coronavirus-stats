@@ -24,7 +24,9 @@ const LineChart = (props) => {
     title: {
       display: true,
       text: props.title,
-      fontSize: 20
+      fontSize: 20,
+      fontColor: '#ccc',
+      fontStyle: 'normal'
     },
     legend: {
       display: false
