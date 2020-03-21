@@ -1,4 +1,5 @@
 {
+  "homepage": "http://zrna.github.io/coronavirus-stats",
   "name": "coronavirus-stats",
   "version": "0.1.0",
   "private": true,
@@ -23,7 +24,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "npm run lint -- --fix",
-    "clear:modules": "rm -rf node_modules"
+    "clear:modules": "rm -rf node_modules",
+    "deploy": "npm run build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.19.0"
+    "eslint-plugin-react": "^7.19.0",
+    "gh-pages": "^2.2.0"
   }
 }
