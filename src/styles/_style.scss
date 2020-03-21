@@ -23,3 +23,19 @@
     }
   }
 }
+
+.confirmed-color {
+  color: $red-color;
+}
+
+.deaths-color {
+  color: $purple-color;
+}
+
+.recovered-color {
+  color: $green-color;
+}
+
+.currently-sick-color {
+  color: $blue-color;
+}

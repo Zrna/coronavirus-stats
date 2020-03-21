@@ -34,3 +34,8 @@ export const sortDataByDate = (categoryData) => {
     return [sortedData, sortedDates, sortedNumbers];
   }
 };
+
+
+export const calculatePercentage = (totalValue, partialValue) => {
+  return ((100 * partialValue) / totalValue).toFixed(2) + '%';
+};

@@ -21,12 +21,18 @@
       color: $gray-color;
       font-size: 14px;
 
-      span {
+      .country-card-number {
         display: block;
         font-weight: bold;
         margin-top: 5px;
         color: #fff;
         font-size: 22px;
+      }
+
+      .percentage {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: normal;
       }
     }
   }

@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { roundNumber, sortDataByDate } from '../../common';
+import {
+  roundNumber,
+  sortDataByDate
+} from '../../common';
 
+import CountryInfoCard from './CountryInfoCard';
 import PieChart from './Charts/PieChart';
 import LineChart from './Charts/LineChart';
 
@@ -72,11 +76,34 @@ const MainContent = (props) => {
       }
       {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
         <div className='info'>
-          <p className='country-card'><span>{roundNumber(confirmed.latest)}</span>Total cases</p>
-          <p className='country-card'><span>+ {roundNumber(inTheLast24h)}</span>in the last 24h</p>
-          <p className='country-card'><span>{roundNumber(deaths.latest)}</span>Deaths</p>
-          <p className='country-card'><span>{roundNumber(recovered.latest)}</span>Recovered</p>
-          <p className='country-card'><span>{roundNumber(currentlySick)}</span>Currently sick</p>
+          <CountryInfoCard
+            cardNumber={confirmed.latest}
+            cardText='Total cases'
+          />
+          <CountryInfoCard
+            cardName='confirmed'
+            cardNumber={inTheLast24h}
+            cardText='in the last 24h'
+            totalNumber={confirmed.latest}
+          />
+          <CountryInfoCard
+            cardName='deaths'
+            cardNumber={deaths.latest}
+            cardText='Deaths'
+            totalNumber={confirmed.latest}
+          />
+          <CountryInfoCard
+            cardName='recovered'
+            cardNumber={recovered.latest}
+            cardText='Recovered'
+            totalNumber={confirmed.latest}
+          />
+          <CountryInfoCard
+            cardName='currently-sick'
+            cardNumber={currentlySick}
+            cardText='Currently sick'
+            totalNumber={confirmed.latest}
+          />
         </div>
         :
         <DefaultMessages />
