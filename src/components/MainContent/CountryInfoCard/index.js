@@ -11,10 +11,12 @@ const CountryInfoCard = (props) => {
       <span className='country-card-number'>
         {props.cardText.includes('24h') ? '+' : null}{roundNumber(props.cardNumber)}
         {props.totalNumber ? 
-          <span className={`percentage ${props.cardName}-color`}>
+          <span className='percentage'>
             (
-            {props.cardText.includes('24h') ? '+' : null}
-            {calculatePercentage(props.totalNumber, props.cardNumber)}
+            <span className={`${props.cardName}-color`} style={{ margin: '0 2px' }}>
+              {props.cardText.includes('24h') ? '+' : null}
+              {calculatePercentage(props.totalNumber, props.cardNumber)}
+            </span>
             )
           </span>
           :
