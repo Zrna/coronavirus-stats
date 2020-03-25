@@ -59,7 +59,7 @@ const MainContent = (props) => {
   };
 
   return (
-    <div className='col main-content'>
+    <div className='col main-content' name='main-content'>
       {props.country ?  
         <>
           {props.selectedCountry.country_code ? 

@@ -1,4 +1,5 @@
 @import './_colors.scss';
+@import './_mediaQueries.scss';
 
 .flex-grid {
   display: flex;
@@ -38,4 +39,24 @@
 
 .currently-sick-color {
   color: $blue-color;
+}
+
+@include tablet {
+  .flex-grid {
+    display: block;
+    .col {
+      &.sidebar,
+      &.main-content {
+        width: 100%;
+      }
+
+      .display-none-tablet {
+        display: none;
+      }
+
+      .display-block-tablet {
+        display: block;
+      }
+    }
+  }
 }

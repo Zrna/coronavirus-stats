@@ -12,8 +12,10 @@
     "react": "^16.13.0",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.0",
+    "react-dropdown-select": "^4.2.0",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.0",
+    "react-scroll": "^1.7.16",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },

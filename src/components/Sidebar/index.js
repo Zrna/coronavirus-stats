@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 import { getApiDataAction, selectedCountryAction } from '../../store/actions';
 import { roundNumber, formatDate, formatTime } from '../../common';
@@ -31,6 +33,14 @@ const Sidebar = (props) => {
   const handleSelectCountry = (selectedCountry) => () => {
     console.log('selected country', selectedCountry);
     props.selectedCountryDispatchToStore(selectedCountry);
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+      scroller.scrollTo('main-content', {
+        duration: 1000,
+        smooth: true,
+        offset: 50
+      });
+    }
   };
 
   return (
@@ -67,12 +77,12 @@ const Sidebar = (props) => {
       <div className='country-list'>
         {countryList && countryList.map((country, i) => {
           return (
-            <div key={i} className='country-row'>
+            <div key={i} className='country-row' onClick={handleSelectCountry(country)}>
               <img
                 src={`https://www.countryflags.io/${country.country_code}/flat/32.png`}
                 alt={country.country_code}
               />
-              <p onClick={handleSelectCountry(country)}>
+              <p>
                 <strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span>
               </p>
             </div>
