@@ -39,3 +39,10 @@ export const sortDataByDate = (categoryData) => {
 export const calculatePercentage = (totalValue, partialValue) => {
   return ((100 * partialValue) / totalValue).toFixed(2) + '%';
 };
+
+export const substractNumberWithPreviousNumberInArray = array => {
+  return array.map((n, i) => {
+    const itertator = i - 1;
+    return n - array[itertator];
+  });
+};

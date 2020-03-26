@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 
 import {
   roundNumber,
-  sortDataByDate
+  sortDataByDate,
+  substractNumberWithPreviousNumberInArray
 } from '../../common';
 
 import CountryInfoCard from './CountryInfoCard';
 import PieChart from './Charts/PieChart';
 import LineChart from './Charts/LineChart';
+import BarChart from './Charts/BarChart';
 
 import '../../styles/_style.scss';
 import './style.scss';
@@ -25,7 +27,8 @@ const MainContent = (props) => {
     sortedDeathsHistoryNumbers,
     sortedRecoveredHistoryDates,
     sortedRecoveredHistoryNumbers,
-    inTheLast24h;
+    inTheLast24h,
+    dailyCases;
 
   if (props.country) {
     confirmed = props.data.confirmed.locations.find(country => country.country === props.country);
@@ -52,11 +55,12 @@ const MainContent = (props) => {
       currentlySick = confirmed.latest - deaths.latest - recovered.latest;
     }
     
+    dailyCases = substractNumberWithPreviousNumberInArray(sortedConfirmedHistoryNumbers);
     inTheLast24h = sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 1] - sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 2];
   }
 
   const DefaultMessages = () => {
-    if (props.selectedCountry.latest === 0) {
+    if (props.selectedCountry.latest <= 0) {
       return <p className='text-in-center'>No data available</p>;
     }
     
@@ -81,7 +85,7 @@ const MainContent = (props) => {
         </>
         : null
       }
-      {props.selectedCountry && props.country && props.selectedCountry.latest !== 0 ? 
+      {props.selectedCountry && props.country && props.selectedCountry.latest > 0 ? 
         <div className='info'>
           <CountryInfoCard
             cardNumber={confirmed.latest}
@@ -116,7 +120,7 @@ const MainContent = (props) => {
         <DefaultMessages />
       }
 
-      {confirmed && deaths && props.selectedCountry.latest !== 0 ?
+      {confirmed && deaths && props.selectedCountry.latest > 0 ?
         <>
           <PieChart
             labels={['Currently sick', 'Deaths', 'Recovered']}
@@ -127,7 +131,15 @@ const MainContent = (props) => {
           <LineChart
             labels={sortedConfirmedHistoryDates}
             data={sortedConfirmedHistoryNumbers}
-            title='Total cases per day'
+            title='Total cases'
+            borderColor='#e60036'
+            backgroundColor='rgba(230, 0, 54, 0.4)'
+          />
+
+          <BarChart
+            labels={sortedConfirmedHistoryDates}
+            data={dailyCases}
+            title='New cases per day'
             borderColor='#e60036'
             backgroundColor='rgba(230, 0, 54, 0.4)'
           />
@@ -135,7 +147,7 @@ const MainContent = (props) => {
           <LineChart
             labels={sortedDeathsHistoryDates}
             data={sortedDeathsHistoryNumbers}
-            title='Total deaths per day'
+            title='Total deaths'
             borderColor='#571aab'
             backgroundColor='rgb(87, 26, 171, 0.4)'
           />
@@ -143,7 +155,7 @@ const MainContent = (props) => {
           <LineChart
             labels={sortedRecoveredHistoryDates}
             data={sortedRecoveredHistoryNumbers}
-            title='Total recovered per day'
+            title='Total recovered'
             borderColor='#4fc974'
             backgroundColor='rgb(79, 201, 116, 0.4)'
           />
