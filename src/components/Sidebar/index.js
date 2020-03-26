@@ -50,10 +50,10 @@ const Sidebar = (props) => {
         {props.error ? <p style={{ color: '#e60036' }}>{props.error}</p> : null}
         <div className='cards-row'>
           <p className='card confirmed'>
-            <span>{props.numberOfConfirmed}</span> confirmed
+            {props.data && props.data.confirmed.latest !== 0 ? <span>{props.numberOfConfirmed}</span> : <span>No data</span> } confirmed
           </p>
           <p className='card deaths'>
-            <span>{props.numberOfDeaths}</span> deaths
+            {props.data && props.data.deaths.latest !== 0 ? <span>{props.numberOfDeaths}</span> : <span>No data</span> } deaths
           </p>
         </div>
         <div className='cards-row'>
@@ -61,7 +61,7 @@ const Sidebar = (props) => {
             {props.data && props.data.recovered.latest !== 0 ? <span>{props.numberOfRecovered}</span> : <span>No data</span> } recovered
           </p>
           <p className='card currently-sick'>
-            <span>{props.numberOfCurrentlySick}</span> currently sick
+            {props.data && props.numberOfCurrentlySick !== 0 ? <span>{props.numberOfCurrentlySick}</span> : <span>No data</span> } currently sick
           </p>
         </div>
         {props.lastUpdatedDate && props.lastUpdatedTime ?
