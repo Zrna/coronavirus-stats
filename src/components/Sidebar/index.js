@@ -58,7 +58,7 @@ const Sidebar = (props) => {
         </div>
         <div className='cards-row'>
           <p className='card recovered'>
-            <span>{props.numberOfRecovered}</span> recovered
+            {props.data && props.data.recovered.latest !== 0 ? <span>{props.numberOfRecovered}</span> : <span>No data</span> } recovered
           </p>
           <p className='card currently-sick'>
             <span>{props.numberOfCurrentlySick}</span> currently sick
