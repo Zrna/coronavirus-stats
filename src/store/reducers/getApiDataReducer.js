@@ -9,7 +9,7 @@ const getApiDataReducer = (state = {}, action) => {
       numberOfConfirmed: action.data[0].latest.confirmed,
       numberOfDeaths: action.data[0].latest.deaths,
       numberOfRecovered: action.data[0].latest.recovered,
-      numberOfCurrentlySick: (action.data[0].latest.confirmed - action.data[0].latest.recovered),
+      numberOfCurrentlySick: (action.data[0].latest.confirmed - action.data[0].latest.recovered - action.data[0].latest.deaths),
       lastUpdated: action.data[0].confirmed.last_updated,
       countryConfirmedDataSum: action.data[1][0].countryConfirmedDataSum,
       countryDeathsDataSum: action.data[1][0].countryDeathsDataSum,
