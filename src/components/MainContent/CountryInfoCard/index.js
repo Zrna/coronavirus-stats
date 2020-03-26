@@ -5,24 +5,31 @@ import {
   calculatePercentage
 } from '../../../common';
 
+
 const CountryInfoCard = (props) => {
+  const last24Hours = props.cardText.includes('24h');
+
   return (
     <p className='country-card'>
-      <span className='country-card-number'>
-        {props.cardText.includes('24h') ? '+' : null}{roundNumber(props.cardNumber)}
-        {props.totalNumber ? 
-          <span className='percentage'>
-            (
-            <span className={`${props.cardName}-color`} style={{ margin: '0 2px' }}>
-              {props.cardText.includes('24h') ? '+' : null}
-              {calculatePercentage(props.totalNumber, props.cardNumber)}
+      {props.cardNumber !== undefined ?
+        <span className='country-card-number'>
+          {last24Hours ? '+' : null}{roundNumber(props.cardNumber)}
+          {props.totalNumber ? 
+            <span className='percentage'>
+              (
+              <span className={`${props.cardName}-color`} style={{ margin: '0 2px' }}>
+                {last24Hours ? '+' : null}
+                {calculatePercentage(props.totalNumber, props.cardNumber)}
+              </span>
+              )
             </span>
-            )
-          </span>
-          :
-          null
-        }
-      </span>
+            :
+            null
+          }
+        </span>
+        :
+        <span className='country-card-number'>no data</span>
+      }
       {props.cardText}
     </p>
   );

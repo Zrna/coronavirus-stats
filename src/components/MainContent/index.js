@@ -31,7 +31,6 @@ const MainContent = (props) => {
     confirmed = props.data.confirmed.locations.find(country => country.country === props.country);
     deaths = props.data.deaths.locations.find(country => country.country === props.country);
     recovered = props.data.recovered.locations.find(country => country.country === props.country);
-    currentlySick = confirmed.latest - deaths.latest - recovered.latest;
 
     const sortedConfirmedData = sortDataByDate(confirmed);
     sortedConfirmedHistoryDates = sortedConfirmedData[1];
@@ -41,10 +40,18 @@ const MainContent = (props) => {
     sortedDeathsHistoryDates = sortedDeathsData[1];
     sortedDeathsHistoryNumbers = sortedDeathsData[2];
 
-    const sortedRecoveredData = sortDataByDate(recovered);
-    sortedRecoveredHistoryDates = sortedRecoveredData[1];
-    sortedRecoveredHistoryNumbers = sortedRecoveredData[2];
-
+    if (recovered === undefined) {
+      recovered = 0;
+      sortedRecoveredHistoryDates = ['00/00/00'];
+      sortedRecoveredHistoryNumbers = [0];
+      currentlySick = confirmed.latest - deaths.latest - 0;
+    } else {
+      const sortedRecoveredData = sortDataByDate(recovered);
+      sortedRecoveredHistoryDates = sortedRecoveredData[1];
+      sortedRecoveredHistoryNumbers = sortedRecoveredData[2];
+      currentlySick = confirmed.latest - deaths.latest - recovered.latest;
+    }
+    
     inTheLast24h = sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 1] - sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 2];
   }
 
@@ -109,7 +116,7 @@ const MainContent = (props) => {
         <DefaultMessages />
       }
 
-      {confirmed && deaths && recovered && props.selectedCountry.latest !== 0 ?
+      {confirmed && deaths && props.selectedCountry.latest !== 0 ?
         <>
           <PieChart
             labels={['Currently sick', 'Deaths', 'Recovered']}

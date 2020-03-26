@@ -41,13 +41,20 @@ const LineChart = (props) => {
     }
   };
 
+  const noData = props.data.length === 1 && props.data[0] === 0;
+
   return (
-    <Line
-      data={lineData}
-      width={40}
-      height={10}
-      options={options}
-    />
+    <>
+      {!noData ?
+        <Line
+          data={lineData}
+          width={40}
+          height={10}
+          options={options}
+        /> :
+        null
+      }
+    </>
   );
 };
 
