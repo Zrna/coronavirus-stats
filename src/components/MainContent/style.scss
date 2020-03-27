@@ -14,26 +14,40 @@
     display: flex;
     flex-wrap: wrap;
 
-    .country-card {
+    .country-cards {
       width: 20%;
-      box-sizing: border-box;
-      text-align: center;
-      text-transform: uppercase;
-      color: $gray-color;
-      font-size: 14px;
 
-      .country-card-number {
-        display: block;
-        font-weight: bold;
-        margin-top: 5px;
-        color: #fff;
-        font-size: 22px;
+      .card {
+        box-sizing: border-box;
+        text-align: center;
+        text-transform: uppercase;
+        color: $gray-color;
+        font-size: 14px;
+  
+        .country-card-number {
+          display: block;
+          font-weight: bold;
+          margin-top: 5px;
+          margin-bottom: 2px;
+          color: #fff;
+          font-size: 22px;
+        }
+  
+        .percentage {
+          margin-left: 5px;
+          font-size: 16px;
+          font-weight: normal;
+        }
       }
 
-      .percentage {
-        margin-left: 5px;
-        font-size: 16px;
-        font-weight: normal;
+      .arrow-separator {
+        text-align: center;
+        margin: 10px;
+
+        &:before {
+          content: '↓';
+          font-size: 20px;
+        }
       }
     }
   }
@@ -43,11 +57,40 @@
   }
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+  .col-2 {
+    flex-grow: 1;
+    width: 50%;
+  }
+}
+
 @include tablet {
   .main-content {
     .info {
-      .country-card {
+      .country-cards {
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px 0;
+        border-bottom: 2px solid $sidebar-background-color;
+        justify-content: center;
+        align-items: center;
+
+        .card {
+          flex-grow: 1;
+          max-width: 125px;
+          
+          .country-card-number {
+            font-size: 16px;
+          }
+        }
+
+        .arrow-separator:before {
+          content: '→';
+        }
       }
     }
 

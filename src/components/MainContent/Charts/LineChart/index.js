@@ -12,8 +12,8 @@ const LineChart = (props) => {
         backgroundColor: props.backgroundColor,
         borderColor: props.borderColor,
         borderWidth: 3,
-        pointBorderWidth: 4,
-        pointHoverRadius: 8,
+        pointBorderWidth: 2,
+        pointHoverRadius: 7,
         pointHoverBackgroundColor: props.borderColor,
         data: props.data
       }
@@ -24,7 +24,7 @@ const LineChart = (props) => {
     title: {
       display: true,
       text: props.title,
-      fontSize: 20,
+      fontSize: 25,
       fontColor: '#ccc',
       fontStyle: 'normal'
     },
@@ -49,7 +49,7 @@ const LineChart = (props) => {
         <Line
           data={lineData}
           width={40}
-          height={10}
+          height={20}
           options={options}
         /> :
         null

@@ -10,9 +10,9 @@ const CountryInfoCard = (props) => {
   const last24Hours = props.cardText.includes('24h');
 
   return (
-    <p className='country-card'>
+    <div className='card'>
       {props.cardNumber !== undefined ?
-        <span className='country-card-number'>
+        <p className='country-card-number'>
           {last24Hours ? '+' : null}{roundNumber(props.cardNumber)}
           {props.totalNumber ? 
             <span className='percentage'>
@@ -26,12 +26,12 @@ const CountryInfoCard = (props) => {
             :
             null
           }
-        </span>
+        </p>
         :
-        <span className='country-card-number'>no data</span>
+        <p className='country-card-number'>no data</p>
       }
       {props.cardText}
-    </p>
+    </div>
   );
 };
 

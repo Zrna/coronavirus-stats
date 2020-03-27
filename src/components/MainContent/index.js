@@ -27,7 +27,9 @@ const MainContent = (props) => {
     sortedDeathsHistoryNumbers,
     sortedRecoveredHistoryDates,
     sortedRecoveredHistoryNumbers,
-    inTheLast24h,
+    newTotalCasesLast24h,
+    deathsLast24h,
+    recoveredLast24h,
     dailyCases;
 
   if (props.country) {
@@ -56,7 +58,9 @@ const MainContent = (props) => {
     }
     
     dailyCases = substractNumberWithPreviousNumberInArray(sortedConfirmedHistoryNumbers);
-    inTheLast24h = sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 1] - sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 2];
+    newTotalCasesLast24h = sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 1] - sortedConfirmedHistoryNumbers[sortedConfirmedHistoryNumbers.length - 2];
+    deathsLast24h = sortedDeathsHistoryNumbers[sortedDeathsHistoryNumbers.length - 1] - sortedDeathsHistoryNumbers[sortedDeathsHistoryNumbers.length - 2];
+    recoveredLast24h = sortedRecoveredHistoryNumbers[sortedRecoveredHistoryNumbers.length - 1] - sortedRecoveredHistoryNumbers[sortedRecoveredHistoryNumbers.length - 2];
   }
 
   const DefaultMessages = () => {
@@ -87,34 +91,57 @@ const MainContent = (props) => {
       }
       {props.selectedCountry && props.country && props.selectedCountry.latest > 0 ? 
         <div className='info'>
-          <CountryInfoCard
-            cardNumber={confirmed.latest}
-            cardText='Total cases'
-          />
-          <CountryInfoCard
-            cardName='confirmed'
-            cardNumber={inTheLast24h}
-            cardText='in the last 24h'
-            totalNumber={confirmed.latest}
-          />
-          <CountryInfoCard
-            cardName='deaths'
-            cardNumber={deaths.latest}
-            cardText='Deaths'
-            totalNumber={confirmed.latest}
-          />
-          <CountryInfoCard
-            cardName='recovered'
-            cardNumber={recovered.latest}
-            cardText='Recovered'
-            totalNumber={confirmed.latest}
-          />
-          <CountryInfoCard
-            cardName='currently-sick'
-            cardNumber={currentlySick}
-            cardText='Currently sick'
-            totalNumber={confirmed.latest}
-          />
+          <div className='country-cards'>
+            <CountryInfoCard
+              cardNumber={confirmed.latest}
+              cardText='Total cases'
+            />
+            <div className='arrow-separator'></div>
+            <CountryInfoCard
+              cardName='confirmed'
+              cardNumber={newTotalCasesLast24h}
+              cardText='last 24h'
+              totalNumber={confirmed.latest}
+            />
+          </div>
+          <div className='country-cards'>
+            <CountryInfoCard
+              cardName='deaths'
+              cardNumber={deaths.latest}
+              cardText='Deaths'
+              totalNumber={confirmed.latest}
+            />
+            <div className='arrow-separator'></div>
+            <CountryInfoCard
+              cardName='deaths'
+              cardNumber={deathsLast24h}
+              cardText='last 24h'
+              totalNumber={confirmed.latest}
+            />
+          </div>
+          <div className='country-cards'>
+            <CountryInfoCard
+              cardName='recovered'
+              cardNumber={recovered.latest}
+              cardText='Recovered'
+              totalNumber={confirmed.latest}
+            />
+            <div className='arrow-separator'></div>
+            <CountryInfoCard
+              cardName='recovered'
+              cardNumber={recoveredLast24h}
+              cardText='last 24h'
+              totalNumber={confirmed.latest}
+            />
+          </div>
+          <div className='country-cards'>
+            <CountryInfoCard
+              cardName='currently-sick'
+              cardNumber={currentlySick}
+              cardText='Currently sick'
+              totalNumber={confirmed.latest}
+            />
+          </div>
         </div>
         :
         <DefaultMessages />
@@ -122,43 +149,57 @@ const MainContent = (props) => {
 
       {confirmed && deaths && props.selectedCountry.latest > 0 ?
         <>
-          <PieChart
-            labels={['Currently sick', 'Deaths', 'Recovered']}
-            data={{currentlySick, deaths, recovered}}
-            title='Total data'
-          />
+          <div>
+            <PieChart
+              labels={['Currently sick', 'Deaths', 'Recovered']}
+              data={{currentlySick, deaths, recovered}}
+              title='Total data'
+            />
+          </div>
 
-          <LineChart
-            labels={sortedConfirmedHistoryDates}
-            data={sortedConfirmedHistoryNumbers}
-            title='Total cases'
-            borderColor='#e60036'
-            backgroundColor='rgba(230, 0, 54, 0.4)'
-          />
+          <div className='row'>
+            <div className='col-2'>
+              <LineChart
+                labels={sortedConfirmedHistoryDates}
+                data={sortedConfirmedHistoryNumbers}
+                title='Total cases'
+                borderColor='#e60036'
+                backgroundColor='rgba(230, 0, 54, 0.4)'
+              />
+            </div>
 
-          <BarChart
-            labels={sortedConfirmedHistoryDates}
-            data={dailyCases}
-            title='New cases per day'
-            borderColor='#e60036'
-            backgroundColor='rgba(230, 0, 54, 0.4)'
-          />
+            <div className='col-2'>
+              <BarChart
+                labels={sortedConfirmedHistoryDates}
+                data={dailyCases}
+                title='New cases per day'
+                borderColor='#e60036'
+                backgroundColor='rgba(230, 0, 54, 0.4)'
+              />
+            </div>
+          </div>
 
-          <LineChart
-            labels={sortedDeathsHistoryDates}
-            data={sortedDeathsHistoryNumbers}
-            title='Total deaths'
-            borderColor='#571aab'
-            backgroundColor='rgb(87, 26, 171, 0.4)'
-          />
+          <div className='row'>
+            <div className='col-2'>
+              <LineChart
+                labels={sortedDeathsHistoryDates}
+                data={sortedDeathsHistoryNumbers}
+                title='Total deaths'
+                borderColor='#571aab'
+                backgroundColor='rgb(87, 26, 171, 0.4)'
+              />
+            </div>
 
-          <LineChart
-            labels={sortedRecoveredHistoryDates}
-            data={sortedRecoveredHistoryNumbers}
-            title='Total recovered'
-            borderColor='#4fc974'
-            backgroundColor='rgb(79, 201, 116, 0.4)'
-          />
+            <div className='col-2'>
+              <LineChart
+                labels={sortedRecoveredHistoryDates}
+                data={sortedRecoveredHistoryNumbers}
+                title='Total recovered'
+                borderColor='#4fc974'
+                backgroundColor='rgb(79, 201, 116, 0.4)'
+              />
+            </div>
+          </div>
         </> : null }
     </div>
   );
