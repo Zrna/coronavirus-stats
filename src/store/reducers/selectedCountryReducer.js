@@ -6,8 +6,8 @@ const selectedCountryReducer = (state = {}, action) => {
     return {
       ...newState,
       country: action.selectedCountry.country,
-      latest: action.selectedCountry.latest,
-      country_code: action.selectedCountry.country_code
+      country_code: action.selectedCountry.country_code,
+      latest: action.selectedCountry.latest
     };
   } else {
     return newState;
