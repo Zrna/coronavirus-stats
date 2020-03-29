@@ -66,7 +66,7 @@
     padding: 5px 0;
     background: $sidebar-background-color;
     border: none;
-    border-bottom: 2px solid $gray-color;
+    border-bottom: 2px solid $light-black;
     color: white;
 
     &:focus {
@@ -111,6 +111,11 @@
 
     p {
       display: inline-block;
+      width: 80%;
+
+      span {
+        float: right;
+      }
     }
   
     .numbers {
