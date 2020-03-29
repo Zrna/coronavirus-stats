@@ -77,13 +77,14 @@ const Sidebar = (props) => {
       <div className='country-list'>
         {countryList && countryList.map((country, i) => {
           return (
-            <div key={i} className='country-row' onClick={handleSelectCountry(country)}>
+            <div key={i} className='country-row' onClick={handleSelectCountry(country)} title={`${roundNumber(country.latest)} confirmed cases in ${country.country}`}>
               <img
                 src={`https://www.countryflags.io/${country.country_code}/flat/32.png`}
                 alt={country.country_code}
               />
               <p>
-                <strong>{country.country}</strong> | <span className='numbers'>{roundNumber(country.latest)}</span>
+                <strong>{country.country}</strong>
+                <span className='numbers'>{roundNumber(country.latest)}</span>
               </p>
             </div>
           );

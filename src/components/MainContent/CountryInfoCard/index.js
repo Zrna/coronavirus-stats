@@ -15,7 +15,10 @@ const CountryInfoCard = (props) => {
         <p className='country-card-number'>
           {last24Hours ? '+' : null}{roundNumber(props.cardNumber)}
           {props.totalNumber ? 
-            <span className='percentage'>
+            <span
+              className='percentage'
+              title={ props.percentageDescription ? `${calculatePercentage(props.totalNumber, props.cardNumber)} of total cases` : null}
+            >
               (
               <span className={`${props.cardName}-color`} style={{ margin: '0 2px' }}>
                 {last24Hours ? '+' : null}

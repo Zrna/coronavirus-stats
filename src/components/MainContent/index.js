@@ -102,6 +102,7 @@ const MainContent = (props) => {
               cardNumber={newTotalCasesLast24h}
               cardText='last 24h'
               totalNumber={confirmed.latest}
+              percentageDescription={true}
             />
           </div>
           <div className='country-cards'>
@@ -110,6 +111,7 @@ const MainContent = (props) => {
               cardNumber={deaths.latest}
               cardText='Deaths'
               totalNumber={confirmed.latest}
+              percentageDescription={true}
             />
             <div className='arrow-separator'></div>
             <CountryInfoCard
@@ -125,6 +127,7 @@ const MainContent = (props) => {
               cardNumber={recovered.latest}
               cardText='Recovered'
               totalNumber={confirmed.latest}
+              percentageDescription={true}
             />
             <div className='arrow-separator'></div>
             <CountryInfoCard
@@ -140,6 +143,7 @@ const MainContent = (props) => {
               cardNumber={currentlySick}
               cardText='Currently sick'
               totalNumber={confirmed.latest}
+              percentageDescription={true}
             />
           </div>
         </div>
