@@ -11,6 +11,7 @@ import CountryInfoCard from './CountryInfoCard';
 import PieChart from './Charts/PieChart';
 import LineChart from './Charts/LineChart';
 import BarChart from './Charts/BarChart';
+import Credits from './Credits';
 
 import '../../styles/_style.scss';
 import './style.scss';
@@ -75,6 +76,7 @@ const MainContent = (props) => {
 
   return (
     <div className='col main-content' name='main-content'>
+      <Credits />
       {props.country ?  
         <>
           {props.selectedCountry.country_code ? 

@@ -2,6 +2,43 @@
 @import '../../styles/_mediaQueries.scss';
 
 .main-content {
+  #credits {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    padding: 15px;
+    font-size: 16px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    div {
+      opacity: 1;
+      margin-top: 23px;
+      margin-left: 0;
+      background-color: $background-color;
+      color: white;
+      border: 1px solid $light-black;
+
+      &:hover {
+        cursor: default;
+      }
+
+      &::after{
+        border-left-color: $light_black;
+      }
+
+      p {
+        margin: 7px 0;
+
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+
   .text-in-center {
     font-size: 32px;
     text-align: center;
@@ -69,6 +106,12 @@
 
 @include tablet {
   .main-content {
+    #credits {
+      div {
+        margin-top: 30px;
+      }
+    }
+
     .info {
       .country-cards {
         width: 100%;
