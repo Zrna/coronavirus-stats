@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
-import { getApiDataAction, selectedCountryAction } from '../../store/actions';
+import { getApiDataAction, selectedCountryAction, getSelectedCountryPopulationAction } from '../../store/actions';
 import { roundNumber, formatDate, formatTime } from '../../common';
 
 import '../../styles/_style.scss';
@@ -32,6 +32,7 @@ const Sidebar = (props) => {
 
   const handleSelectCountry = (selectedCountry) => () => {
     console.log('selected country', selectedCountry);
+    props.getSelectedCountryPopulation(selectedCountry.country_code);
     props.selectedCountryDispatchToStore(selectedCountry);
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
@@ -114,7 +115,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getApiData: () => dispatch(getApiDataAction()),
-    selectedCountryDispatchToStore: (country) => dispatch(selectedCountryAction(country))
+    selectedCountryDispatchToStore: (country) => dispatch(selectedCountryAction(country)),
+    getSelectedCountryPopulation: (country_code) => dispatch(getSelectedCountryPopulationAction(country_code))
   };
 };
 

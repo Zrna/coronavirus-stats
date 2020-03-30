@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   roundNumber,
   sortDataByDate,
-  substractNumberWithPreviousNumberInArray
+  substractNumberWithPreviousNumberInArray,
+  calculatePercentage
 } from '../../common';
 
 import CountryInfoCard from './CountryInfoCard';
@@ -72,6 +73,11 @@ const MainContent = (props) => {
     if (!props.selectedCountry.country) {
       return <p className='text-in-center'>Select country from the country list</p>;
     }
+
+    if (!props.selectedCountryPopulation) {
+      // TODO: some weird error occurs if this isn't here...
+      return null;
+    }
   };
 
   return (
@@ -91,7 +97,7 @@ const MainContent = (props) => {
         </>
         : null
       }
-      {props.selectedCountry && props.country && props.selectedCountry.latest > 0 ? 
+      {props.selectedCountryPopulation && props.selectedCountry && props.country && props.selectedCountry.latest > 0 ?
         <div className='info'>
           <div className='country-cards'>
             <CountryInfoCard
@@ -146,6 +152,20 @@ const MainContent = (props) => {
               cardText='Currently sick'
               totalNumber={confirmed.latest}
               percentageDescription={true}
+            />
+          </div>
+          <div className='country-cards'>
+            <CountryInfoCard
+              cardName='country-population'
+              cardNumber={props.selectedCountryPopulation}
+              cardText='Country population'
+            />
+            <div className='arrow-separator'></div>
+            <CountryInfoCard
+              cardName='country-population-percentage'
+              cardNumber={calculatePercentage(props.selectedCountryPopulation, confirmed.latest, 3)}
+              cardText='population infected'
+              smallText='(all cases)'
             />
           </div>
         </div>
@@ -215,6 +235,7 @@ const mapStateToProps = (state) => {
   return {
     data: state.apiData.data,
     selectedCountry: state.selectedCountry,
+    selectedCountryPopulation: state.countryPopulation.selectedCountryPopulation,
     country: state.selectedCountry.country,
     latest: roundNumber(state.selectedCountry.latest)
   };

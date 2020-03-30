@@ -17,12 +17,12 @@ const CountryInfoCard = (props) => {
           {props.totalNumber ? 
             <span
               className='percentage'
-              title={ props.percentageDescription ? `${calculatePercentage(props.totalNumber, props.cardNumber)} of total cases` : null}
+              title={ props.percentageDescription ? `${calculatePercentage(props.totalNumber, props.cardNumber, 2)} of total cases` : null}
             >
               (
               <span className={`${props.cardName}-color`} style={{ margin: '0 2px' }}>
                 {last24Hours ? '+' : null}
-                {calculatePercentage(props.totalNumber, props.cardNumber)}
+                {calculatePercentage(props.totalNumber, props.cardNumber, 2)}
               </span>
               )
             </span>
@@ -34,6 +34,14 @@ const CountryInfoCard = (props) => {
         <p className='country-card-number'>no data</p>
       }
       {props.cardText}
+      {props.smallText ? 
+        <>
+          <br />
+          <small>{props.smallText}</small>
+        </>
+        :
+        null
+      }
     </div>
   );
 };
