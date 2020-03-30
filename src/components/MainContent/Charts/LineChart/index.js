@@ -11,9 +11,10 @@ const LineChart = (props) => {
         lineTension: 0.5,
         backgroundColor: props.backgroundColor,
         borderColor: props.borderColor,
-        borderWidth: 3,
-        pointBorderWidth: 2,
-        pointHoverRadius: 7,
+        borderWidth: 2,
+        pointRadius: 2,
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
         pointHoverBackgroundColor: props.borderColor,
         data: props.data
       }
