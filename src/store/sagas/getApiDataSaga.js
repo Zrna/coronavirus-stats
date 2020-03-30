@@ -13,6 +13,9 @@ function getSumData(res, propertyName) {
     if (existing) {
       existing.latest += province.latest;
       existing.province = '';
+      Object.keys(existing.history).map((date) => {
+        existing.history[date] += province.history[date];
+      });
     } else {
       countries.push(province);
     }
