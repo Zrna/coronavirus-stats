@@ -1,10 +1,11 @@
 import { GET_API_DATA_SUCCESS, GET_API_DATA_ERROR } from '../actions/actionTypes';
 
-const getApiDataReducer = (state = {}, action) => {
+const getApiDataReducer = (state = { loading: true }, action) => {
   const newState = { ...state };
   if (action.type === GET_API_DATA_SUCCESS) {
     return {
       ...newState,
+      loading: false,
       data: action.data[0],
       numberOfConfirmed: action.data[0].latest.confirmed,
       numberOfDeaths: action.data[0].latest.deaths,

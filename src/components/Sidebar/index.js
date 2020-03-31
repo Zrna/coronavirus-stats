@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
-import { getApiDataAction, selectedCountryAction, getSelectedCountryPopulationAction } from '../../store/actions';
+import { selectedCountryAction, getSelectedCountryPopulationAction } from '../../store/actions';
 import { roundNumber, formatDate, formatTime } from '../../common';
 
 import '../../styles/_style.scss';
@@ -11,11 +11,6 @@ import './style.scss';
 
 const Sidebar = (props) => {
   const [countryList, setCountryList] = useState();
-  const { getApiData } = props;
-
-  useEffect(() => {
-    getApiData();
-  }, [getApiData]);
 
   // setting initial country list - resolved redux saga and useEffect infinite loop
   if (props.countryConfirmedDataSum && countryList === undefined) {
@@ -114,7 +109,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getApiData: () => dispatch(getApiDataAction()),
     selectedCountryDispatchToStore: (country) => dispatch(selectedCountryAction(country)),
     getSelectedCountryPopulation: (country_code) => dispatch(getSelectedCountryPopulationAction(country_code))
   };
