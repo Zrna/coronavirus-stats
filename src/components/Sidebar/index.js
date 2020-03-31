@@ -73,7 +73,7 @@ const Sidebar = (props) => {
         }
       </div>
       <div className='input-search'>
-        <input placeholder='Type country name...' autoFocus onChange={handleInputOnChange} />
+        <input type='search' placeholder='Type country name...' autoFocus onChange={handleInputOnChange} />
       </div>
       <div className='country-list'>
         {countryList && countryList.map((country, i) => {

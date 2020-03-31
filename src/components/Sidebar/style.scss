@@ -73,6 +73,13 @@
       outline: transparent;
       color: white;
     }
+
+    &::-webkit-search-cancel-button{
+      position:relative;
+      right: 25px;
+      cursor: pointer;
+      font-size: 18px;
+    }
   }
 }
 

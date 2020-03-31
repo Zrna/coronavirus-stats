@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip';
 const Credits = () => {
   return (
     <div id='credits'>
-      <a data-tip='custom show' data-event='click focus'>Credits</a>
+      <p data-tip='custom show' data-event='click focus'>Credits</p>
       <ReactTooltip globalEventOff='click' place='left' type='light' effect='solid' clickable={true}>
         <p>Application made by <a href='https://www.lukazrnic.com' target='_blank' rel='noopener noreferrer'>Luka Zrnic</a></p>
         <p>Source code: <a href='https://github.com/Zrna/coronavirus-stats' target='_blank' rel='noopener noreferrer'>coronavirus-stats</a></p>
