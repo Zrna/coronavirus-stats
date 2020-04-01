@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import BackToTop from 'react-back-to-top-button';
 
 import {
   roundNumber,
@@ -227,6 +228,15 @@ const MainContent = (props) => {
             </div>
           </div>
         </> : null }
+
+      <BackToTop
+        className='back-to-top'
+        showAt={200}
+        speed={1500}
+        easing='easeOutSine'
+      >
+        <span>↑ go to top</span>
+      </BackToTop>
     </div>
   );
 };
