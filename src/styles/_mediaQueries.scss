@@ -1,5 +1,12 @@
+$only-desktop: 1440px;
 $laptop-width: 1024px;
 $tablet-width: 768px;
+
+@mixin only-desktop {
+  @media (min-width: #{$only-desktop}) {
+    @content;
+  }
+}
 
 @mixin laptop {
   @media (max-width: #{$laptop-width}) {

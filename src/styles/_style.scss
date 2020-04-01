@@ -3,6 +3,15 @@
 
 .flex-grid {
   display: flex;
+
+  .loader-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+  }
   
   .col {
     // flex: 1;
@@ -40,6 +49,21 @@
 
 .currently-sick-color {
   color: $blue-color;
+}
+
+@include only-desktop {
+  .flex-grid {    
+    .col {  
+      &.main-content {
+        top: 0;
+        bottom: 0;
+        right: 0;
+        position: fixed;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    }
+  }
 }
 
 @include tablet {
