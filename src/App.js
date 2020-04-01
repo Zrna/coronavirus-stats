@@ -15,6 +15,20 @@ function App(props) {
     getApiData();
   }, [getApiData]);
 
+
+  const Content = () => {
+    if (props.error) {
+      return <p className='text-in-center'>{props.error}</p>;
+    } else {
+      return (
+        <>
+          <Sidebar />
+          <MainContent />
+        </>
+      );
+    }
+  };
+
   return (
     <div className='flex-grid'>
       {props.loading ?
@@ -27,10 +41,7 @@ function App(props) {
           />
         </div>
         :
-        <>
-          <Sidebar />
-          <MainContent />
-        </>
+        <Content />
       }
     </div>
   );
@@ -38,7 +49,8 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.apiData.loading
+    loading: state.apiData.loading,
+    error: state.apiData.error
   };
 };
 

@@ -19,6 +19,7 @@ const getApiDataReducer = (state = { loading: true }, action) => {
   } else if (action.type === GET_API_DATA_ERROR) {
     return {
       ...newState,
+      loading: false,
       error: action.error
     };
   } else {

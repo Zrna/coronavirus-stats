@@ -52,7 +52,7 @@ function* getApiData() {
     yield put({ type: GET_API_DATA_SUCCESS, data });
   } catch (e) {
     console.log('getApiData saga Error: ', e);
-    yield put({ type: GET_API_DATA_ERROR, error: 'Something went wrong while retrieving API data.' });
+    yield put({ type: GET_API_DATA_ERROR, error: 'Something went wrong while retrieving API data. Try again.' });
   }
 }
 
