@@ -21,6 +21,11 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "latest"
+        }
+    },
     "rules": {
         "linebreak-style": [
             "error",
