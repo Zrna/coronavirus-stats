@@ -1,0 +1,70 @@
+@import '../../../styles/_colors.scss';
+@import '../../../styles/_mediaQueries.scss';
+
+.cards-row {
+  display: flex;
+
+  .card {
+    flex: 1;
+    color: $gray-color;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    background: $light-black;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid $light-black;
+    border-radius: 50px;
+  
+    span {
+      display: block;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+
+  .card:hover {
+    cursor: pointer;
+
+    &.confirmed {
+      border: 2px solid $red-color;
+      span {
+        color: $red-color;
+      }
+    }
+
+    &.deaths {
+      border: 2px solid $purple-color;
+      span {
+        color: $purple-color;
+      }
+    }
+
+    &.recovered {
+      border: 2px solid $green-color;
+      span {
+        color: $green-color;
+      }
+    }
+
+    &.currently-sick {
+      border: 2px solid $blue-color;
+      span {
+        color: $blue-color;
+      }
+    }
+  }
+}
+
+@include laptop {
+  .cards-row {
+    .card {
+      font-size: 10px;
+
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+}
