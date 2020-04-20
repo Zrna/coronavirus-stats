@@ -5,15 +5,14 @@ import { scroller } from 'react-scroll';
 import {
   selectedCountryAction,
   getSelectedCountryPopulationAction
-} from '../../../../store/actions';
-import { roundNumber } from '../../../../common';
+} from '../../../store/actions';
+import { roundNumber } from '../../../common';
 
-const Country = ({ country, ...props }) => {
-
+const Country = ({ data, country, ...props }) => {
+  
   const handleSelectCountry = (selectedCountry) => () => {
-    console.log('selected country', selectedCountry);
+    props.selectedCountryDispatchToStore(data, selectedCountry);
     props.getSelectedCountryPopulation(selectedCountry.country_code);
-    props.selectedCountryDispatchToStore(selectedCountry);
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
       scroller.scrollTo('main-content', {
@@ -42,9 +41,13 @@ const Country = ({ country, ...props }) => {
   );
 };
 
+const mapStateToProps = ({ apiData: { data }}) => ({
+  data
+});
+
 const mapDispatchToProps = dispatch => ({
-  selectedCountryDispatchToStore: (country) => dispatch(selectedCountryAction(country)),
+  selectedCountryDispatchToStore: (data, country) => dispatch(selectedCountryAction(data, country)),
   getSelectedCountryPopulation: (country_code) => dispatch(getSelectedCountryPopulationAction(country_code))
 });
 
-export default connect(null, mapDispatchToProps)(Country);
+export default connect(mapStateToProps, mapDispatchToProps)(Country);

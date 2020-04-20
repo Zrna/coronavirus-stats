@@ -10,7 +10,6 @@ function* getSelectedCountryPopulationData(action) {
     const data = yield fetch(`https://coronavirus-tracker-api.herokuapp.com/v2/locations?country_code=${action.selectedCountryCode}`)
       .then(res => res.json())
       .then(res => {
-        console.log('population data', res.locations[0]);
         return res;
       })
       .catch(e => console.log(e));

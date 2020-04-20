@@ -32,20 +32,13 @@ const PieChart = (props) => {
     }
   };
 
-  const noData = props.data.length === 1 && props.data[0] === 0;
-
   return (
-    <>
-      {!noData ?
-        <Pie
-          data={pieData}
-          width={40}
-          height={10}
-          options={options}
-        /> :
-        null
-      }
-    </>
+    <Pie
+      data={pieData}
+      width={40}
+      height={10}
+      options={options}
+    />
   );
 };
 

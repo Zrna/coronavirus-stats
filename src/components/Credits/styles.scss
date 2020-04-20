@@ -1,0 +1,47 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_mediaQueries.scss';
+
+#credits {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  padding: 15px;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  div {
+    opacity: 1;
+    margin-top: 23px;
+    margin-left: 0;
+    background-color: $background-color;
+    color: white;
+    border: 1px solid $light-black;
+
+    &:hover {
+      cursor: default;
+    }
+
+    &::after{
+      border-left-color: $light_black;
+    }
+
+    p {
+      margin: 7px 0;
+
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
+@include tablet {
+  #credits {
+    div {
+      margin-top: 30px;
+    }
+  }
+}

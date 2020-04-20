@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import '../../styles/_style.scss';
 import './style.scss';
+
 import searchIcon from '../../assets/search.svg';
 
-import Header from './Header';
-import CountryList from './CountryList';
+import Header from '../../components/SidebarHeader';
+import CountryList from '../../components/CountryList';
 
 const Sidebar = ({ countryConfirmedDataSum }) => {
   const [countryList, setCountryList] = useState(countryConfirmedDataSum);
@@ -31,9 +32,9 @@ const Sidebar = ({ countryConfirmedDataSum }) => {
   );
 };
 
-const mapStateToProps = ({ apiData }) => {
+const mapStateToProps = ({ apiData: { countryConfirmedDataSum } }) => {
   return {
-    countryConfirmedDataSum: apiData.countryConfirmedDataSum
+    countryConfirmedDataSum
   };
 };
 

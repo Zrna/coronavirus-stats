@@ -19,7 +19,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "settings": {
         "react": {
@@ -71,6 +72,8 @@
         "space-before-function-paren": [
             "error",
             "never"
-        ]
+        ],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 }

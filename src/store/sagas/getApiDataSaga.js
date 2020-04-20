@@ -2,10 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { GET_API_DATA_REQUEST, GET_API_DATA_SUCCESS, GET_API_DATA_ERROR } from '../actions/actionTypes';
 
 function getSumData(res, propertyName) {
-  let data;
-  if (propertyName === 'confirmed') data = res.confirmed.locations;
-  if (propertyName === 'deaths') data = res.deaths.locations;
-  if (propertyName === 'recovered') data = res.recovered.locations;
+  const data = res[propertyName].locations;
   
   const combineDataSum = data.reduce((countries, province) => {
     const existing = countries.find(country => country.country === province.country);
@@ -33,8 +30,6 @@ function* getApiData() {
     const data = yield fetch('https://coronavirus-tracker-api.herokuapp.com/all')
       .then(res => res.json())
       .then(res => {
-        console.log('data', res);
-
         const countryConfirmedDataSum = getSumData(res, 'confirmed');
         const countryDeathsDataSum = getSumData(res, 'deaths');
         const countryRecoveredDataSum = getSumData(res, 'recovered');

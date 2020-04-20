@@ -1,0 +1,26 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_mediaQueries.scss';
+
+.main-content {
+  .chartjs-render-monitor {
+    margin-top: 30px;
+  }
+
+  .back-to-top {
+    font-size: 14px;
+    color: $gray-color;
+    background: $background-color;
+    margin: 5px 10px;
+    padding: 5px;
+    border: 1px solid $gray-color;
+    border-radius: 0;
+  }
+}
+
+@include tablet {
+  .main-content {
+    canvas {
+      display: none !important;
+    }
+  }
+}

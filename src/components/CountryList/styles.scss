@@ -1,7 +1,7 @@
-@import '../../../styles/_colors.scss';
+@import '../../styles/_colors.scss';
 
 .country-list {
-  height: calc(100vh - 351px);
+  height: calc(100vh - 346px);
   overflow-y: scroll;
 
   &::-webkit-scrollbar-track {

@@ -1,6 +1,6 @@
 import { SELECTED_COUNTRY } from './actionTypes';
 
-export const selectedCountryAction = (country) => ({
+export const selectedCountryAction = (allData, country) => ({
   type: SELECTED_COUNTRY,
-  selectedCountry: country
+  selectedCountry: {allData, country}
 });

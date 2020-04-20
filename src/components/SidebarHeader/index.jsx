@@ -7,7 +7,7 @@ import {
   roundNumber,
   formatDate,
   formatTime
-} from '../../../common';
+} from '../../common';
 
 import Card from './Card';
 
@@ -29,7 +29,7 @@ const Header = ({ error, numberOfConfirmed, numberOfDeaths, numberOfRecovered, n
           Last update
           <span title='DD/MM/YYYY'> {lastUpdatedDate} </span>
           in
-          <span title='HH/MM/SS'> {lastUpdatedTime} </span>.
+          <span title='HH/MM/SS'> {lastUpdatedTime}</span>.
         </p>
         :
         null

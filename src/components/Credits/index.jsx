@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 
+import './styles.scss';
+
 const Credits = () => {
   return (
     <div id='credits'>

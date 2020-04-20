@@ -1,16 +1,20 @@
 import { SELECTED_COUNTRY } from '../actions/actionTypes';
 
+import { getMainDataForSelectedCountry } from '../../common';
+
 const selectedCountryReducer = (state = {}, action) => {
   const newState = { ...state };
-  if (action.type === SELECTED_COUNTRY) {
-    return {
-      ...newState,
-      country: action.selectedCountry.country,
-      country_code: action.selectedCountry.country_code,
-      latest: action.selectedCountry.latest
-    };
-  } else {
-    return newState;
+  switch (action.type) {
+    case SELECTED_COUNTRY:
+      return {
+        ...newState,
+        country: action.selectedCountry.country,
+        confirmed: getMainDataForSelectedCountry(action.selectedCountry.allData, 'confirmed', action.selectedCountry.country.country),
+        deaths: getMainDataForSelectedCountry(action.selectedCountry.allData, 'deaths', action.selectedCountry.country.country),
+        recovered: getMainDataForSelectedCountry(action.selectedCountry.allData, 'recovered', action.selectedCountry.country.country)
+      };
+    default:
+      return newState;
   }
 };
 

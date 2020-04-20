@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
 import { getApiDataAction } from './store/actions';
-import Sidebar from './components/Sidebar';
-import MainContent from './components/MainContent';
+import Sidebar from './containers/Sidebar';
+import MainContent from './containers/MainContent';
 
 import './styles/_style.scss';
 
-function App(props) {
-  const { getApiData } = props;
+function App({ getApiData, error, loading }) {
 
   useEffect(() => {
     getApiData();
@@ -17,8 +16,8 @@ function App(props) {
 
 
   const Content = () => {
-    if (props.error) {
-      return <p className='text-in-center'>{props.error}</p>;
+    if (error) {
+      return <p className='text-in-center' style={{ fontSize: '20px' }}>{error}</p>;
     } else {
       return (
         <>
@@ -31,33 +30,29 @@ function App(props) {
 
   return (
     <div className='flex-grid'>
-      {props.loading ?
-        <div className='loader-center'>
+      {
+        loading ?
           <Loader
-            type='MutatingDots'
-            color='#4fc974'
+            className='loader-center'
+            type='Oval'
+            color='#eee'
             height={100}
             width={100}
           />
-        </div>
-        :
-        <Content />
+          :
+          <Content />
       }
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loading: state.apiData.loading,
-    error: state.apiData.error
-  };
-};
+const mapStateToProps = ({ apiData: { loading, error } }) => ({
+  loading,
+  error
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getApiData: () => dispatch(getApiDataAction())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getApiData: () => dispatch(getApiDataAction())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

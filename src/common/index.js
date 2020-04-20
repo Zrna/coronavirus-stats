@@ -1,5 +1,5 @@
-export const roundNumber = (number) => {
-  if (number !== undefined && number !== null) return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const getMainDataForSelectedCountry = (data, property, selectedCountryName) => {
+  return data[property].locations.find(country => country.country === selectedCountryName);
 };
 
 export const formatDate = timestamp => {
@@ -23,18 +23,19 @@ export const formatTime = timestamp => {
 };
 
 export const sortDataByDate = (categoryData) => {
-  if (categoryData.history !== undefined) {
-    let sortedData = Object.keys(categoryData.history).map(key => ({date: key, number: categoryData.history[key]}));
-    sortedData = sortedData.sort((a,b)=> new Date(a.date) - new Date(b.date));
-    sortedData = Object.values(sortedData);
+  let sortedData = Object.keys(categoryData.history).map(key => ({date: key, number: categoryData.history[key]}));
+  sortedData = sortedData.sort((a,b)=> new Date(a.date) - new Date(b.date));
+  sortedData = Object.values(sortedData);
 
-    const sortedDates = sortedData.map(a => a.date);
-    const sortedNumbers = sortedData.map(a => a.number);
+  const sortedDates = sortedData.map(a => a.date);
+  const sortedNumbers = sortedData.map(a => a.number);
 
-    return [sortedData, sortedDates, sortedNumbers];
-  }
+  return [categoryData, sortedDates, sortedNumbers];
 };
 
+export const roundNumber = (number) => {
+  if (number !== undefined && number !== null) return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 export const calculatePercentage = (totalValue, partialValue, toFixed) => {
   return ((100 * partialValue) / totalValue).toFixed(toFixed) + '%';
@@ -45,4 +46,8 @@ export const substractNumberWithPreviousNumberInArray = array => {
     const itertator = i - 1;
     return n - array[itertator];
   });
+};
+
+export const calculateLast24HoursData = (arrayOfNumbers) => {
+  return arrayOfNumbers[arrayOfNumbers.length - 1] - arrayOfNumbers[arrayOfNumbers.length - 2];
 };

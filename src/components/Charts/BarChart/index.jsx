@@ -38,20 +38,13 @@ const BarChart = (props) => {
     }
   };
 
-  const noData = props.data.length === 1 && props.data[0] === 0;
-
   return (
-    <>
-      {!noData ?
-        <Bar
-          data={data}
-          width={40}
-          height={20}
-          options={options}
-        />
-        : null
-      }
-    </>
+    <Bar
+      data={data}
+      width={40}
+      height={20}
+      options={options}
+    />
   );
 };
 
