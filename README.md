@@ -9,6 +9,9 @@ The application was created using: React JS, Redux, redux-saga, Chart.js (react-
 
 **Try app [here](https://zrna.github.io/coronavirus-stats/).**
 
+## Preview
+![Coronavirus statistics](https://user-images.githubusercontent.com/22341530/81283675-4dcf2200-905d-11ea-8222-f73dde2bd4ed.gif)
+
 ## Installation
 1. Download or clone the project
 2. Go into the project `cd coronavirus-stats`
