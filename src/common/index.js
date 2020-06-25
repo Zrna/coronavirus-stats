@@ -37,8 +37,10 @@ export const roundNumber = (number) => {
   if (number !== undefined && number !== null) return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export const calculatePercentage = (totalValue, partialValue, toFixed) => {
-  return ((100 * partialValue) / totalValue).toFixed(toFixed) + '%';
+export const calculatePercentage = (totalValue, partialValue, toFixed = 2) => {
+  const result = ((100 * partialValue) / totalValue).toFixed(toFixed);
+
+  return parseFloat(result);
 };
 
 export const substractNumberWithPreviousNumberInArray = array => {
