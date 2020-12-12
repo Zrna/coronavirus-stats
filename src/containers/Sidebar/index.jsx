@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import '../../styles/_style.scss';
-import './style.scss';
-
 import searchIcon from '../../assets/search.svg';
-
-import Header from '../../components/SidebarHeader';
 import CountryList from '../../components/CountryList';
+import Header from '../../components/SidebarHeader';
+import '../../styles/_style.scss';
+
+import './style.scss';
 
 const Sidebar = ({ countryConfirmedDataSum }) => {
   const [countryList, setCountryList] = useState(countryConfirmedDataSum);
 
-  const handleInputSearch = (e) => {
+  const handleInputSearch = e => {
     const inputValue = e.target.value.toLowerCase();
-    const filterList = countryConfirmedDataSum.filter(country => (
-      country.country.toLowerCase().includes(inputValue)
-    ));
+    const filterList = countryConfirmedDataSum.filter(({ country }) =>
+      country.toLowerCase().includes(inputValue)
+    );
     setCountryList(filterList);
   };
 
@@ -25,7 +24,11 @@ const Sidebar = ({ countryConfirmedDataSum }) => {
       <Header />
       <div className='input-search'>
         <img src={searchIcon} alt='Search icon' />
-        <input type='search' placeholder='Search country by name' onChange={handleInputSearch} />
+        <input
+          type='search'
+          placeholder='Search country by name'
+          onChange={handleInputSearch}
+        />
       </div>
       <CountryList countryList={countryList} />
     </div>
@@ -34,9 +37,8 @@ const Sidebar = ({ countryConfirmedDataSum }) => {
 
 const mapStateToProps = ({ apiData: { countryConfirmedDataSum } }) => {
   return {
-    countryConfirmedDataSum
+    countryConfirmedDataSum,
   };
 };
-
 
 export default connect(mapStateToProps)(Sidebar);

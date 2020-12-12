@@ -1,51 +1,51 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const BarChart = (props) => {
-
+const BarChart = ({
+  backgroundColor,
+  borderColor,
+  labels,
+  data: initialData,
+  title,
+}) => {
   const data = {
-    labels: props.labels,
+    labels,
     datasets: [
       {
-        backgroundColor: props.backgroundColor,
-        borderColor: props.borderColor,
+        backgroundColor,
+        borderColor,
         borderWidth: 1,
-        hoverBackgroundColor: props.borderColor,
-        hoverBorderColor: props.borderColor,
-        data: props.data
-      }
-    ]
+        hoverBackgroundColor: borderColor,
+        hoverBorderColor: borderColor,
+        data: initialData,
+      },
+    ],
   };
 
   const options = {
     title: {
       display: true,
-      text: props.title,
+      text: title,
       fontSize: 20,
       fontColor: '#ccc',
-      fontStyle: 'normal'
+      fontStyle: 'normal',
     },
     legend: {
-      display: false
+      display: false,
     },
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          precision: 0
-        }
-      }]
-    }
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            precision: 0,
+          },
+        },
+      ],
+    },
   };
 
-  return (
-    <Bar
-      data={data}
-      width={40}
-      height={20}
-      options={options}
-    />
-  );
+  return <Bar data={data} width={40} height={20} options={options} />;
 };
 
 export default BarChart;

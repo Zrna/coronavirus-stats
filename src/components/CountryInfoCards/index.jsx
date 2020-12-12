@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './styles.scss';
-
 import { calculatePercentage } from '../../common';
 
 import Card from './Card';
+import './styles.scss';
 
-const CountryInfoCards = (props) => {
+const CountryInfoCards = props => {
   return (
     <div className='info'>
       <div className='country-cards'>
@@ -21,7 +20,7 @@ const CountryInfoCards = (props) => {
           cardNumber={props.newCasesLast24h}
           cardText='last 24h'
           totalNumber={props.selectedCountryConfirmed.latest}
-          percentageDescription={true}
+          percentageDescription
         />
       </div>
       <div className='country-cards'>
@@ -30,7 +29,7 @@ const CountryInfoCards = (props) => {
           cardNumber={props.selectedCountryDeaths.latest}
           cardText='Deaths'
           totalNumber={props.selectedCountryConfirmed.latest}
-          percentageDescription={true}
+          percentageDescription
         />
         <div className='arrow-separator'></div>
         <Card
@@ -46,7 +45,7 @@ const CountryInfoCards = (props) => {
           cardNumber={props.selectedCountryRecovered.latest}
           cardText='Recovered'
           totalNumber={props.selectedCountryConfirmed.latest}
-          percentageDescription={true}
+          percentageDescription
         />
         <div className='arrow-separator'></div>
         <Card
@@ -62,7 +61,7 @@ const CountryInfoCards = (props) => {
           cardNumber={props.currentlySick}
           cardText='Currently sick'
           totalNumber={props.selectedCountryConfirmed.latest}
-          percentageDescription={true}
+          percentageDescription
         />
       </div>
       <div className='country-cards'>
@@ -74,7 +73,11 @@ const CountryInfoCards = (props) => {
         <div className='arrow-separator'></div>
         <Card
           cardName='country-population-percentage'
-          cardNumber={calculatePercentage(props.selectedCountryPopulation, props.selectedCountryConfirmed.latest, 3)}
+          cardNumber={calculatePercentage(
+            props.selectedCountryPopulation,
+            props.selectedCountryConfirmed.latest,
+            3
+          )}
           cardText='population infected'
           smallText='(all cases)'
         />
@@ -83,11 +86,14 @@ const CountryInfoCards = (props) => {
   );
 };
 
-const mapStateToProps = ({ selectedCountry, countryPopulation: { selectedCountryPopulation }}) => ({
+const mapStateToProps = ({
+  selectedCountry,
+  countryPopulation: { selectedCountryPopulation },
+}) => ({
   selectedCountryConfirmed: selectedCountry.confirmed,
   selectedCountryDeaths: selectedCountry.deaths,
   selectedCountryRecovered: selectedCountry.recovered,
-  selectedCountryPopulation
+  selectedCountryPopulation,
 });
 
 export default connect(mapStateToProps)(CountryInfoCards);

@@ -4,21 +4,31 @@ import { connect } from 'react-redux';
 import {
   sortDataByDate,
   substractNumberWithPreviousNumberInArray,
-  calculateLast24HoursData
+  calculateLast24HoursData,
 } from '../../common';
-
-import Credits from '../Credits';
-import CountryInfoHeader from '../CountryInfoHeader';
-import CountryInfoCards from '../CountryInfoCards';
 import Charts from '../Charts';
+import CountryInfoCards from '../CountryInfoCards';
+import CountryInfoHeader from '../CountryInfoHeader';
+import Credits from '../Credits';
 
-const MainContent = ({ selectedCountryName, selectedCountryCode, selectedCountryConfirmed, selectedCountryDeaths, selectedCountryRecovered }) => {
+const MainContent = ({
+  selectedCountryName,
+  selectedCountryCode,
+  selectedCountryConfirmed,
+  selectedCountryDeaths,
+  selectedCountryRecovered,
+}) => {
   const sortedConfirmedData = sortDataByDate(selectedCountryConfirmed);
   const sortedDeathsData = sortDataByDate(selectedCountryDeaths);
   const sortedRecoveredData = sortDataByDate(selectedCountryRecovered);
-  
-  const currentlySick = selectedCountryConfirmed.latest - selectedCountryDeaths.latest - selectedCountryRecovered.latest;
-  const dailyCases = substractNumberWithPreviousNumberInArray(sortedConfirmedData[2]);
+
+  const currentlySick =
+    selectedCountryConfirmed.latest -
+    selectedCountryDeaths.latest -
+    selectedCountryRecovered.latest;
+  const dailyCases = substractNumberWithPreviousNumberInArray(
+    sortedConfirmedData[2]
+  );
 
   const newCasesLast24h = calculateLast24HoursData(sortedConfirmedData[2]);
   const deathsLast24h = calculateLast24HoursData(sortedDeathsData[2]);
@@ -30,7 +40,7 @@ const MainContent = ({ selectedCountryName, selectedCountryCode, selectedCountry
       <CountryInfoHeader
         countryCode={selectedCountryCode}
         countryName={selectedCountryName}
-      />      
+      />
       <CountryInfoCards
         newCasesLast24h={newCasesLast24h}
         deathsLast24h={deathsLast24h}
@@ -48,7 +58,9 @@ const MainContent = ({ selectedCountryName, selectedCountryCode, selectedCountry
   );
 };
 
-const mapStateToProps = ({ selectedCountry: { country, confirmed, deaths, recovered } }) => ({
+const mapStateToProps = ({
+  selectedCountry: { country, confirmed, deaths, recovered },
+}) => ({
   selectedCountryName: country.country,
   selectedCountryCode: country.country_code,
   selectedCountryConfirmed: confirmed,

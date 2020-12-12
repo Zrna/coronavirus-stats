@@ -5,13 +5,12 @@ import './styles.scss';
 const CountryInfoHeader = ({ countryCode, countryName }) => {
   return (
     <div className='country-info-header'>
-      {countryCode ? 
+      {countryCode && (
         <img
           src={`https://www.countryflags.io/${countryCode}/flat/32.png`}
           alt={countryCode}
         />
-        : null
-      }
+      )}
       <h1>{countryName}</h1>
     </div>
   );

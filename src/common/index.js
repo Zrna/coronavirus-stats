@@ -1,12 +1,19 @@
-export const getMainDataForSelectedCountry = (data, property, selectedCountryName) => {
-  return data[property].locations.find(country => country.country === selectedCountryName);
+export const getMainDataForSelectedCountry = (
+  data,
+  property,
+  selectedCountryName
+) => {
+  return data[property].locations.find(
+    country => country.country === selectedCountryName
+  );
 };
 
 export const formatDate = timestamp => {
+  console.log('timestamp', timestamp);
   if (timestamp !== undefined) {
     const year = timestamp.slice(0, 4);
-    const day = timestamp.slice(5, 7);
-    const month = timestamp.slice(8, 10);
+    const month = timestamp.slice(5, 7);
+    const day = timestamp.slice(8, 10);
 
     return `${day}/${month}/${year}`;
   }
@@ -22,9 +29,12 @@ export const formatTime = timestamp => {
   }
 };
 
-export const sortDataByDate = (categoryData) => {
-  let sortedData = Object.keys(categoryData.history).map(key => ({date: key, number: categoryData.history[key]}));
-  sortedData = sortedData.sort((a,b)=> new Date(a.date) - new Date(b.date));
+export const sortDataByDate = categoryData => {
+  let sortedData = Object.keys(categoryData.history).map(key => ({
+    date: key,
+    number: categoryData.history[key],
+  }));
+  sortedData = sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
   sortedData = Object.values(sortedData);
 
   const sortedDates = sortedData.map(a => a.date);
@@ -33,8 +43,9 @@ export const sortDataByDate = (categoryData) => {
   return [categoryData, sortedDates, sortedNumbers];
 };
 
-export const roundNumber = (number) => {
-  if (number !== undefined && number !== null) return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const roundNumber = number => {
+  if (number !== undefined && number !== null)
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export const calculatePercentage = (totalValue, partialValue, toFixed = 2) => {
@@ -50,6 +61,9 @@ export const substractNumberWithPreviousNumberInArray = array => {
   });
 };
 
-export const calculateLast24HoursData = (arrayOfNumbers) => {
-  return arrayOfNumbers[arrayOfNumbers.length - 1] - arrayOfNumbers[arrayOfNumbers.length - 2];
+export const calculateLast24HoursData = arrayOfNumbers => {
+  return (
+    arrayOfNumbers[arrayOfNumbers.length - 1] -
+    arrayOfNumbers[arrayOfNumbers.length - 2]
+  );
 };

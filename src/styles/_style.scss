@@ -12,7 +12,7 @@
     height: 80vh;
     width: 100%;
   }
-  
+
   .col {
     // flex: 1;
 
@@ -36,7 +36,7 @@
     .row {
       display: flex;
       flex-wrap: wrap;
-    
+
       .col-2 {
         flex-grow: 1;
         width: 50%;
@@ -70,8 +70,8 @@
 }
 
 @include only-desktop {
-  .flex-grid {    
-    .col {  
+  .flex-grid {
+    .col {
       &.main-content {
         top: 0;
         bottom: 0;

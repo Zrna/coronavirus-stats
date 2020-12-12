@@ -1,53 +1,54 @@
 import React from 'react';
 
-import {
-  roundNumber,
-  calculatePercentage
-} from '../../../common';
+import { roundNumber, calculatePercentage } from '../../../common';
 
-const Card = ({ cardText, cardNumber, cardName, totalNumber, percentageDescription, smallText }) => {
+const Card = ({
+  cardText,
+  cardNumber,
+  cardName,
+  totalNumber,
+  percentageDescription,
+  smallText,
+}) => {
   const last24Hours = cardText.includes('24h');
 
   const CardNumberWithSymbol = () => {
-    if (cardText === 'population infected') return `${roundNumber(cardNumber)}%`; // '%' at the end of the string
-    if (last24Hours) return `+${roundNumber(cardNumber)}`; // '+' at the beginning of the string
+    const roundedNumber = roundNumber(cardNumber);
 
-    return roundNumber(cardNumber);
+    if (cardText === 'population infected') return `${roundedNumber}%`;
+    if (last24Hours) return `+${roundedNumber}`;
+
+    return roundedNumber;
   };
+
+  const cardPercentage =
+    totalNumber && `${calculatePercentage(totalNumber, cardNumber)}%`;
 
   return (
     <div className='card'>
-      {cardNumber >= 0 ?
+      {cardNumber >= 0 ? (
         <p className='country-card-number'>
           <CardNumberWithSymbol />
-          {totalNumber ? 
+          {totalNumber && (
             <span
               className='percentage'
-              title={ percentageDescription ? `${calculatePercentage(totalNumber, cardNumber)}% of total cases` : null}
+              title={
+                percentageDescription && `${cardPercentage} of total cases`
+              }
             >
               (
               <span className={`${cardName}-color`} style={{ margin: '0 2px' }}>
-                {last24Hours ? '+' : null}
-                {calculatePercentage(totalNumber, cardNumber)}%
+                {last24Hours && '+'} {cardPercentage}
               </span>
               )
             </span>
-            :
-            null
-          }
+          )}
         </p>
-        :
+      ) : (
         <p className='country-card-number'>no data</p>
-      }
+      )}
       <span>{cardText}</span>
-      {smallText ? 
-        <>
-          <br />
-          <small>{smallText}</small>
-        </>
-        :
-        null
-      }
+      {smallText && <small>{smallText}</small>}
     </div>
   );
 };
